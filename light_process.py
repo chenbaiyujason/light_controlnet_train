@@ -8,6 +8,8 @@ import jsonlines
 
 data_dir = Path(r"/mnt/disks/data/grayscale_image_aesthetic_3M")
 
+cache_dir = "/mnt/disks/data/cache/consdata"
+Path(cache_dir).mkdir(parents=True, exist_ok=True)
 
 output_image_foder = Path("/mnt/disks/data/consdata/deimg")
 Path(output_image_foder).mkdir(parents=True, exist_ok=True)
