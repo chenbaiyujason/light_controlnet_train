@@ -1,28 +1,44 @@
 import os
 import json
 
-# 获取当前目录的上级目录
-parent_dir = '/mnt/disks/data/'
+#定义跳过的文件格式
+SKIP_FORMATS = {'.png', '.jpg'}
 
-# 遍历上级目录的文件结构
-dir_tree = {}
-for root, dirs, files in os.walk(parent_dir):
-    if 'jpg' in files or 'png' in files:
-        break  # 如果有jpg或png文件，直接退出该目录的遍历
-    level = root.replace(parent_dir, '').count(os.sep)
-    current_dir = os.path.basename(root)
-    dir_tree[current_dir] = {}
-    if level == 1:
-        for d in dirs:
-            dir_tree[current_dir][d] = {}
-    else:
-        parent_dir = os.path.basename(os.path.dirname(root))
-        dir_tree[parent_dir][current_dir] = {}
-        for d in dirs:
-            dir_tree[parent_dir][current_dir][d] = {}
-        for f in files:
-            dir_tree[parent_dir][current_dir][f] = ''
+#定义要保存的目录路径
+DIRECTORY_PATH = '/mnt/disks/data/'
 
-# 将目录树保存到json文件中
-with open('dir_tree.json', 'w') as f:
-    json.dump(dir_tree, f)
+#遍历目录树，获取目录结构
+def get_directory_tree(path):
+    # 判断路径是否为文件
+    if os.path.isfile(path):
+        # 如果是文件，则返回空
+        return None
+    # 初始化目录结构
+    directory_tree = {
+        'name': os.path.basename(path),
+        'type': 'directory',
+        'children': []
+    }
+    # 遍历子目录和文件
+    for filename in os.listdir(path):
+        filepath = os.path.join(path, filename)
+        # 判断是否需要跳过该文件
+        if os.path.isfile(filepath) and any(filepath.endswith(fmt) for fmt in SKIP_FORMATS):
+            continue
+        # 获取子目录结构
+        child = get_directory_tree(filepath)
+        # 如果子目录结构不为空，则添加到目录树中
+        if child is not None:
+            directory_tree['children'].append(child)
+    return directory_tree
+
+#将目录结构保存成json文件
+def save_directory_tree(directory_tree, file_path):
+    with open(file_path, 'w') as f:
+        json.dump(directory_tree, f, indent=4)
+
+
+# 获取目录结构
+directory_tree = get_directory_tree(DIRECTORY_PATH)
+# 保存目录结构到json文件
+save_directory_tree(directory_tree, 'directory_tree.json')
