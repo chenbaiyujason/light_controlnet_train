@@ -68,5 +68,5 @@ cache_dir = "/mnt/disks/data/cache/deimg"
 Path(cache_dir).mkdir(parents=True, exist_ok=True)
 odatapath="/mnt/disks/data/consdata/consdeimg/"
 dataset = load_dataset("/mnt/disks/data/grayscale_image_aesthetic_3M/data/", cache_dir=cache_dir)
-dataset = dataset.map(transforms, remove_columns=["conditioning_image"], batched=True,num_proc=120)
+dataset = dataset.map(transforms, remove_columns=["conditioning_image"], batched=True,num_proc=220)
 dataset.save_to_disk(odatapath)
