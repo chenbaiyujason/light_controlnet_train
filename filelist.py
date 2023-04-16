@@ -2,7 +2,7 @@ import os
 import json
 
 # 获取当前目录的上级目录
-parent_dir = os.path.abspath(os.path.join(os.getcwd(), os.pardir))
+parent_dir = '/mnt/disks/data/'
 
 # 遍历上级目录的文件结构
 dir_tree = {}
