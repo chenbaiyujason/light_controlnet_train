@@ -60,7 +60,7 @@ def imgprocess(img):
 
 
 def transforms(examples):
-    examples["conditioning_imag"] = [imgprocess(image) for image in examples["image"]]
+    examples["conditioning_image"] = [imgprocess(image) for image in examples["image"]]
     return examples
 
 odatapath="/mnt/disks/data/consdata/consdeimg/"
