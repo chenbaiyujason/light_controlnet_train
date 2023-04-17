@@ -4,7 +4,7 @@ export DATASET_DIR="/mnt/disks/data/consdata/consdeimg/train"
 export DISK_DIR="/mnt/disks/data/cache/trainlight"
 export HUB_MODEL_ID="ioclab/control_v1u_sd15_illumination"
 
-python train_controlnet_flax.py \
+sudo python train_controlnet_flax.py \
  --pretrained_model_name_or_path=$MODEL_DIR \
  --output_dir=$OUTPUT_DIR \
  --train_data_dir=$DATASET_DIR \
