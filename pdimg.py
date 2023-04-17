@@ -68,7 +68,7 @@ cache_dir = "/mnt/disks/data/cache/deimg"
 Path(cache_dir).mkdir(parents=True, exist_ok=True)
 odatapath="/mnt/disks/data/consdata/consdeimg/"
 dataset = load_dataset("/mnt/disks/data/grayscale_image_aesthetic_3M/data/", cache_dir=cache_dir)
-datasettest=dataset.train_test_split(test_size=0.001)
+datasettest=dataset.select([0,1,2,3])
 datasettest = datasettest.remove_columns("conditioning_image")
 datasettest = datasettest.map(transforms, batched=True,num_proc=220)
 print(datasettest.column_names)
