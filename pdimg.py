@@ -9,7 +9,7 @@ import cv2
 from datasets import load_dataset
 
 from pathlib import Path
-
+import wandb
 
 
 def imgprocess(img):
@@ -64,6 +64,11 @@ def transforms(examples):
     examples["conditioning_image"] = [imgprocess(image) for image in examples["image"]]
     return examples
 
+
+# wandb.init(project='light-dataset-test')
+#
+
+
 cache_dir = "/mnt/disks/data/cache/deimg"
 Path(cache_dir).mkdir(parents=True, exist_ok=True)
 odatapath="/mnt/disks/data/consdata/consdeimg/"
@@ -75,7 +80,10 @@ print(dataset.num_rows)
 # datasettest = datasettest.remove_columns("conditioning_image")
 # datasettest = datasettest.map(transforms, batched=True,num_proc=220)
 # print(datasettest.column_names)
-# dataset = dataset.remove_columns("conditioning_image")
-# dataset = dataset.map(transforms, batched=True,num_proc=220)
-# dataset.save_to_disk(odatapath)
-# dataset.push_to_hub('ioclab/light', private=True, max_shard_size="10GB")
+dataset = dataset.remove_columns("conditioning_image")
+dataset = dataset.map(transforms, batched=True,num_proc=220)
+print(dataset.column_names)
+print(dataset.num_columns)
+print(dataset.num_rows)
+dataset.save_to_disk(odatapath)
+dataset.push_to_hub('ioclab/light', private=True, max_shard_size="10GB")
