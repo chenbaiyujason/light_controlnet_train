@@ -150,8 +150,8 @@ def log_validation(controlnet, controlnet_params, tokenizer, args, rng, weight_d
 
         wandb.log({"validation": formatted_images})
     else:
-        logger.warn(f"image logging not implemented for {args.report_to}")
-
+        # logger.warn(f"image logging not implemented for {args.report_to}")
+        pass
     return image_logs
 
 

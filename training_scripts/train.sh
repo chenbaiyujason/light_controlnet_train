@@ -23,6 +23,7 @@ sudo python train_controlnet_flax.py \
  --from_pt \
  --num_train_epochs=3 \
  --max_train_steps=22500 \
+ --report_to="wandb" \
  --dataloader_num_workers=16 \
  --logging_steps=1 \
  --push_to_hub \
