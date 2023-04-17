@@ -1,6 +1,7 @@
 import os
 
 from datasets import load_dataset
+from datasets import load_from_disk
 from pathlib import Path
 from PIL import Image
 
