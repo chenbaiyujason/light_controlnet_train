@@ -62,7 +62,7 @@ if is_wandb_available():
 
 # Will error if the minimal version of diffusers is not installed. Remove at your own risks.
 check_min_version("0.16.0.dev0")
-
+print(jax.device_count())
 logger = logging.getLogger(__name__)
 
 
