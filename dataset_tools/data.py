@@ -20,7 +20,7 @@ _FEATURES = datasets.Features(
 
 
 _DEFAULT_CONFIG = datasets.BuilderConfig(name="default", version=_VERSION)
-DATA_DIR = "/mnt/disks/persist/data"
+DATA_DIR = "/mnt/disks/persist/datasets/3m"
 
 
 class coyo(datasets.GeneratorBasedBuilder):

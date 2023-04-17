@@ -20,6 +20,8 @@ import os
 import random
 import time
 from pathlib import Path
+from jax_smi import initialise_tracking
+initialise_tracking()
 
 import jax
 import jax.numpy as jnp

@@ -2,7 +2,6 @@ import argparse
 import logging
 import random
 
-import cv2
 import jsonlines
 import numpy as np
 import requests
@@ -90,22 +89,8 @@ if __name__ == "__main__":
             image_path = f"{args.train_data_dir}/images/{example['id']}.png"
             image.save(image_path)
 
-            # generate and save canny image
-            processed_image = np.array(image)
+            processed_image = image.convert('L')
 
-            # apply random threholds
-            #   note that this should normally be applied on the fly during training.
-            #   But that's fine when dealing with a larger dataset like here.
-            threholds = (
-                random.randint(0, 255),
-                random.randint(0, 255),
-            )
-            processed_image = cv2.Canny(processed_image, min(threholds), max(threholds))
-            processed_image = processed_image[:, :, None]
-            processed_image = np.concatenate(
-                [processed_image, processed_image, processed_image], axis=2
-            )
-            processed_image = Image.fromarray(processed_image)
             processed_image_path = (
                 f"{args.train_data_dir}/processed_images/{example['id']}.png"
             )
