@@ -548,10 +548,12 @@ def make_train_dataset(args, tokenizer, batch_size=None):
 
     # Preprocessing the datasets.
     # We need to tokenize inputs and targets.
-    if isinstance(dataset["train"], IterableDataset):
-        column_names = next(iter(dataset["train"])).keys()
-    else:
-        column_names = dataset["train"].column_names
+    # if isinstance(dataset["train"], IterableDataset):
+    #     column_names = next(iter(dataset["train"])).keys()
+    # else:
+    #     column_names = dataset["train"].column_names
+    column_names = dataset.column_names
+
 
     # 6. Get the column names for input/target.
     if args.image_column is None:
@@ -565,7 +567,7 @@ def make_train_dataset(args, tokenizer, batch_size=None):
             )
 
     if args.caption_column is None:
-        caption_column = column_names[1]
+        caption_column = column_names[2]
         logger.info(f"caption column defaulting to {caption_column}")
     else:
         caption_column = args.caption_column
@@ -575,7 +577,7 @@ def make_train_dataset(args, tokenizer, batch_size=None):
             )
 
     if args.conditioning_image_column is None:
-        conditioning_image_column = column_names[2]
+        conditioning_image_column = column_names[1]
         logger.info(f"conditioning image column defaulting to {caption_column}")
     else:
         conditioning_image_column = args.conditioning_image_column
