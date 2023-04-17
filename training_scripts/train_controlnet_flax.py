@@ -650,7 +650,7 @@ def make_train_dataset(args, tokenizer, batch_size=None):
                 remove_columns=list(dataset["train"].features.keys()),
             )
         else:
-            train_dataset = dataset["train"].with_transform(preprocess_train)
+            train_dataset = dataset.with_transform(preprocess_train)
 
     return train_dataset
 
