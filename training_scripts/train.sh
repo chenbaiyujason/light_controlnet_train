@@ -1,7 +1,7 @@
 export MODEL_DIR="runwayml/stable-diffusion-v1-5"
-export OUTPUT_DIR="/mnt/disks/persist/controlnet_model/control_v1u_sd15_brightness/{timestamp}"
-export DATASET_DIR="/mnt/disks/persist/datasets/grayscale_image_aesthetic_3M"
-export DISK_DIR="/mnt/disks/persist/cache"
+export OUTPUT_DIR="/mnt/disks/data/controlnet_model/control_v1u_sd15_brightness/{timestamp}"
+export DATASET_DIR="/mnt/disks/data/consdata/consdeimg/train"
+export DISK_DIR="/mnt/disks/data/cache/trainlight"
 export HUB_MODEL_ID="ioclab/control_v1u_sd15_illumination"
 
 python3 train_controlnet_flax.py \
@@ -13,7 +13,7 @@ python3 train_controlnet_flax.py \
  --validation_image "./conditioning_image_1.jpg" "./conditioning_image_2.jpg" "./conditioning_image_3.jpg" "./conditioning_image_4.jpg" "./conditioning_image_5.jpg" "./conditioning_image_6.jpg" "./conditioning_image_7.jpg" "./conditioning_image_8.jpg" \
  --validation_prompt "a woman sitting at a piano in a dark room with a window behind her and a window behind her, Atey Ghailan, anime art, a painting, neo-romanticism" "a woman with horns and a demon face on her head, with her hands on her face, in front of a demon like background, Ayami Kojima, anime art, a manga drawing, space art" "a woman with horns and a demon face on her head, with her hands on her face, in front of a demon like background, Ayami Kojima, anime art, a manga drawing, space art" "(masterpiece, best quality: 1.4), detailed background, white crystal, crysal cluster,long hair,jewelry, earrings, necklace, crown, bride, white hair, halo," "(masterpiece, best quality: 1.4), detailed background, white crystal, crysal cluster,long hair,jewelry, earrings, necklace, crown, bride, white hair, halo,"  "(masterpiece, best quality: 1.4), detailed background, white crystal, crysal cluster,long hair,jewelry, earrings, necklace, crown, bride, white hair, halo," "(masterpiece, best quality: 1.4), detailed background, white crystal, crysal cluster,long hair,jewelry, earrings, necklace, crown, bride, white hair, halo," "(masterpiece, best quality: 1.4), detailed background, white crystal, crysal cluster,long hair,jewelry, earrings, necklace, crown, bride, white hair, halo,"  \
  --validation_steps=500 \
- --checkpointing_steps=1500 \
+ --checkpointing_steps=500 \
  --resolution=512 \
  --learning_rate=1e-5 \
  --train_batch_size=4 \
