@@ -14,8 +14,8 @@ from pathlib import Path
 import wandb
 # 更改此路径为你希望将数据集下载到的目录
 custom_cache_dir = "/mnt/disks/hfcache"
-Path(custom_cache_dir).mkdir(parents=True, exist_ok=True)
-os.environ["HF_DATASETS_CACHE"] = custom_cache_dir
+# Path(custom_cache_dir).mkdir(parents=True, exist_ok=True)
+# os.environ["HF_DATASETS_CACHE"] = custom_cache_dir
 
 
 def imgprocess(img):
@@ -70,13 +70,11 @@ def transforms(examples):
     examples["conditioning_image"] = [imgprocess(image) for image in examples["image"]]
     return examples
 # 选择子集，将 '0-sfw' 更改为 '1-full' 或 '2-tags' 以下载其他子集
-datasets.set_caching_enabled(True)
-datasets.set_cache_folder('/mnt/disks/hfcache')
 builder = DanbooruDataset(config_name='0-sfw')
 
 # 下载数据集
 print("正在下载数据集...")
-builder.download_and_prepare()
+builder.download_and_prepare(custom_cache_dir)
 
 # 加载数据集
 print("正在加载数据集...")
