@@ -19,7 +19,7 @@ sudo python3 train_controlnet_flax.py \
  --learning_rate=1e-5 \
  --train_batch_size=2 \
  --gradient_accumulation_steps=25 \
- --revision="non-ema" \
+# --revision="non-ema" \
  --mixed_precision="bf16" \
  --from_pt \
  --num_train_epochs=3 \
