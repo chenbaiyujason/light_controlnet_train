@@ -1,4 +1,4 @@
-export MODEL_DIR="runwayml/stable-diffusion-v1-5"
+export MODEL_DIR="andite/anything-v4.0"
 export OUTPUT_DIR="/mnt/disks/data/controlnet_model/control_v1u_sd15_illumination/{timestamp}"
 export DATASET_DIR="/mnt/disks/data/consdata/consdeimg/"
 export DISK_DIR="/mnt/disks/data/cache/trainlight"
