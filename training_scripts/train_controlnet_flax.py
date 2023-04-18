@@ -20,8 +20,6 @@ import os
 import random
 import time
 from pathlib import Path
-from jax_smi import initialise_tracking
-initialise_tracking()
 
 import jax
 import jax.numpy as jnp
@@ -62,7 +60,7 @@ if is_wandb_available():
 
 # Will error if the minimal version of diffusers is not installed. Remove at your own risks.
 check_min_version("0.16.0.dev0")
-print(jax.device_count())
+
 logger = logging.getLogger(__name__)
 
 
@@ -78,20 +76,11 @@ def image_grid(imgs, rows, cols):
     return grid
 
 
-def log_validation(controlnet, controlnet_params, tokenizer, args, rng, weight_dtype):
-    logger.info("Running validation... ")
+def log_validation(pipeline, pipeline_params, controlnet_params, tokenizer, args, rng, weight_dtype):
+    logger.info("Running validation...")
 
-    pipeline, params = FlaxStableDiffusionControlNetPipeline.from_pretrained(
-        args.pretrained_model_name_or_path,
-        tokenizer=tokenizer,
-        controlnet=controlnet,
-        safety_checker=None,
-        dtype=weight_dtype,
-        revision=args.revision,
-        from_pt=args.from_pt,
-    )
-    params = jax_utils.replicate(params)
-    params["controlnet"] = controlnet_params
+    pipeline_params = pipeline_params.copy()
+    pipeline_params["controlnet"] = controlnet_params
 
     num_samples = jax.device_count()
     prng_seed = jax.random.split(rng, jax.device_count())
@@ -123,7 +112,7 @@ def log_validation(controlnet, controlnet_params, tokenizer, args, rng, weight_d
         images = pipeline(
             prompt_ids=prompt_ids,
             image=processed_image,
-            params=params,
+            params=pipeline_params,
             prng_seed=prng_seed,
             num_inference_steps=50,
             jit=True,
@@ -150,8 +139,8 @@ def log_validation(controlnet, controlnet_params, tokenizer, args, rng, weight_d
 
         wandb.log({"validation": formatted_images})
     else:
-        # logger.warn(f"image logging not implemented for {args.report_to}")
-        pass
+        logger.warn(f"image logging not implemented for {args.report_to}")
+
     return image_logs
 
 
@@ -548,12 +537,10 @@ def make_train_dataset(args, tokenizer, batch_size=None):
 
     # Preprocessing the datasets.
     # We need to tokenize inputs and targets.
-    # if isinstance(dataset, IterableDataset):
-    #     column_names = next(iter(dataset)).keys()
-    # else:
-    #     column_names = dataset.column_names
-    column_names = dataset.column_names
-
+    if isinstance(dataset["train"], IterableDataset):
+        column_names = next(iter(dataset["train"])).keys()
+    else:
+        column_names = dataset["train"].column_names
 
     # 6. Get the column names for input/target.
     if args.image_column is None:
@@ -638,19 +625,19 @@ def make_train_dataset(args, tokenizer, batch_size=None):
     if jax.process_index() == 0:
         if args.max_train_samples is not None:
             if args.streaming:
-                dataset = dataset.shuffle(seed=args.seed).take(args.max_train_samples)
+                dataset["train"] = dataset["train"].shuffle(seed=args.seed).take(args.max_train_samples)
             else:
-                dataset = dataset.shuffle(seed=args.seed).select(range(args.max_train_samples))
+                dataset["train"] = dataset["train"].shuffle(seed=args.seed).select(range(args.max_train_samples))
         # Set the training transforms
         if args.streaming:
-            train_dataset = dataset.map(
+            train_dataset = dataset["train"].map(
                 preprocess_train,
                 batched=True,
                 batch_size=batch_size,
-                remove_columns=list(dataset.features.keys()),
+                remove_columns=list(dataset["train"].features.keys()),
             )
         else:
-            train_dataset = dataset.with_transform(preprocess_train)
+            train_dataset = dataset["train"].with_transform(preprocess_train)
 
     return train_dataset
 
@@ -804,6 +791,17 @@ def main():
             "mid_block",
         ]:
             controlnet_params[key] = unet_params[key]
+
+    pipeline, pipeline_params = FlaxStableDiffusionControlNetPipeline.from_pretrained(
+        args.pretrained_model_name_or_path,
+        tokenizer=tokenizer,
+        controlnet=controlnet,
+        safety_checker=None,
+        dtype=weight_dtype,
+        revision=args.revision,
+        from_pt=args.from_pt,
+    )
+    pipeline_params = jax_utils.replicate(pipeline_params)
 
     # Optimization
     if args.scale_lr:
@@ -1078,7 +1076,7 @@ def main():
                 and global_step % args.validation_steps == 0
                 and jax.process_index() == 0
             ):
-                _ = log_validation(controlnet, state.params, tokenizer, args, validation_rng, weight_dtype)
+                _ = log_validation(pipeline, pipeline_params, state.params, tokenizer, args, validation_rng, weight_dtype)
 
             if global_step % args.logging_steps == 0 and jax.process_index() == 0:
                 if args.report_to == "wandb":
@@ -1110,7 +1108,7 @@ def main():
         if args.validation_prompt is not None:
             if args.profile_validation:
                 jax.profiler.start_trace(args.output_dir)
-            image_logs = log_validation(controlnet, state.params, tokenizer, args, validation_rng, weight_dtype)
+            image_logs = log_validation(pipeline, pipeline_params, state.params, tokenizer, args, validation_rng, weight_dtype)
             if args.profile_validation:
                 jax.profiler.stop_trace()
         else:
