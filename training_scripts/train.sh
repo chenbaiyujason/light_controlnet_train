@@ -1,4 +1,4 @@
-export MODEL_DIR="andite/anything-v4.0"
+export MODEL_DIR="runwayml/stable-diffusion-v1-5"
 export OUTPUT_DIR="/mnt/disks/data/controlnet_model/control_v1u_sd15_illumination/{timestamp}"
 export DATASET_DIR="/mnt/disks/data/consdata/consdeimg/"
 export DISK_DIR="/mnt/disks/data/cache/trainlight"
@@ -19,7 +19,7 @@ sudo python3 train_controlnet_flax.py \
  --learning_rate=1e-5 \
  --train_batch_size=2 \
  --gradient_accumulation_steps=25 \
-# --revision="non-ema" \
+ --revision="non-ema" \
  --mixed_precision="bf16" \
  --from_pt \
  --num_train_epochs=3 \
