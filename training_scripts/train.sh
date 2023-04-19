@@ -1,12 +1,12 @@
 export MODEL_DIR="runwayml/stable-diffusion-v1-5"
-export OUTPUT_DIR="/mnt/disks/data/controlnet_model/control_v1u_sd15_illumination/{timestamp}"
-export DATASET_DIR="/mnt/disks/data/consdata/consdeimg/"
-export DISK_DIR="/mnt/disks/data/cache/trainlight"
+export OUTPUT_DIR="/mnt/disks/controlnet_model/control_v1u_sd15_illumination/{timestamp}"
+export DATASET_DIR="/mnt/disks/consdata/consdeimg/"
+export DISK_DIR="/mnt/disks/cache/trainlight"
 export HUB_MODEL_ID="ioclab/control_v1u_sd15_illumination"
 
 sudo python3 train_controlnet_flax.py \
  --pretrained_model_name_or_path=$MODEL_DIR \
- --controlnet_model_name_or_path="/mnt/disks/data/controlnet_model/control_v1u_sd15_illumination/control_v1u_sd15_brightness/20230417_120417/3500"  \
+ --controlnet_model_name_or_path="/mnt/disks/controlnet_model/control_v1u_sd15_illumination/20230418_113648/7000"  \
  --output_dir=$OUTPUT_DIR \
  --train_data_dir=$DATASET_DIR \
  --load_from_disk \

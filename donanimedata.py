@@ -16,9 +16,10 @@ import wandb
 custom_cache_dir = "/mnt/disks/hfcache"
 # Path(custom_cache_dir).mkdir(parents=True, exist_ok=True)
 # os.environ["HF_DATASETS_CACHE"] = custom_cache_dir
-
-
+import random
 def imgprocess(img):
+    rand_num = random.uniform(-0.3, 1)
+    rand_num = round(rand_num, 2)
     # 打开原始图像
     if img.mode != 'RGB':
         img = img.convert('RGB')
@@ -59,12 +60,11 @@ def imgprocess(img):
     img = img.resize((img.size[0] * 16, img.size[1] * 16), resample=Image.NEAREST)
     img = img.filter(ImageFilter.GaussianBlur(radius=10))
     enhancer = ImageEnhance.Contrast(img)
-    img_contrast = enhancer.enhance(1.3)
+    img_contrast = enhancer.enhance(1.2 + rand_num * 0.15)
     img = img_contrast
     img = img.resize((512, 512), resample=Image.BILINEAR)
 
     return img
-
 
 def transforms(examples):
     examples["conditioning_image"] = [imgprocess(image) for image in examples["image"]]
@@ -74,7 +74,7 @@ builder = DanbooruDataset(config_name='0-sfw')
 
 # 下载数据集
 print("正在下载数据集...")
-builder.download_and_prepare(custom_cache_dir)
+builder.download_and_prepare(output_dir=custom_cache_dir)
 
 # 加载数据集
 print("正在加载数据集...")
@@ -86,12 +86,13 @@ print(dataset)
 print(dataset.column_names)
 print(dataset.num_columns)
 print(dataset.num_rows)
-odatapath="/mnt/disks/data/consdata/consanimeimg/"
+odatapath="/mnt/disks/consdata/consanimeimg/"
 dataset = dataset.remove_columns("post_id")
 dataset.push_to_hub('ioclab/animesfw', private=True, max_shard_size="1GB")
 dataset.save_to_disk(odatapath)
 # cache_dir = "/mnt/disks/data/cache/deanimeimg"
 # Path(cache_dir).mkdir(parents=True, exist_ok=True)
+# odatapath="/mnt/disks/consdata/consanimeimg/"
 # dataset = load_dataset("/mnt/disks/data/grayscale_image_aesthetic_3M/data/", cache_dir=cache_dir)
 
 # datasettest = datasettest.remove_columns("conditioning_image")

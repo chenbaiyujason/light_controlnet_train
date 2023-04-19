@@ -10,9 +10,11 @@ from datasets import load_dataset
 
 from pathlib import Path
 import wandb
-
+import random
 
 def imgprocess(img):
+    rand_num = random.uniform(-0.3, 1)
+    rand_num = round(rand_num, 2)
     # 打开原始图像
     if img.mode != 'RGB':
         img = img.convert('RGB')
@@ -53,7 +55,7 @@ def imgprocess(img):
     img = img.resize((img.size[0] * 16, img.size[1] * 16), resample=Image.NEAREST)
     img = img.filter(ImageFilter.GaussianBlur(radius=10))
     enhancer = ImageEnhance.Contrast(img)
-    img_contrast = enhancer.enhance(1.3)
+    img_contrast = enhancer.enhance(1.2 + rand_num * 0.15)
     img = img_contrast
     img = img.resize((512, 512), resample=Image.BILINEAR)
 
