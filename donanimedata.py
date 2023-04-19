@@ -70,28 +70,30 @@ def transforms(examples):
     examples["conditioning_image"] = [imgprocess(image) for image in examples["image"]]
     return examples
 # 选择子集，将 '0-sfw' 更改为 '1-full' 或 '2-tags' 以下载其他子集
-# builder = DanbooruDataset(config_name='0-sfw')
+builder = DanbooruDataset(config_name='0-sfw')
 
 # # 下载数据集
 # print("正在下载数据集...")
-# builder.download_and_prepare(output_dir=custom_cache_dir)
+builder.download_and_prepare(output_dir=custom_cache_dir)
 
 # # 加载数据集
 # print("正在加载数据集...")
-# dataset = builder.as_dataset()
+dataset = builder.as_dataset()
 dataload = "/mnt/disks/hfcache/"
 cache_dir = "/mnt/disks/cache/animgsfw"
-builder = load_dataset_builder(dataload )
-dataset = builder.as_dataset()
 # dataset = load_dataset(dataload, cache_dir=cache_dir)
 # 显示一些数据集信息
 print("数据集信息：")
-print(dataset)
 print(dataset.column_names)
 print(dataset.num_columns)
 print(dataset.num_rows)
 odatapath="/mnt/disks/consdata/consanimeimg/"
 dataset = dataset.remove_columns("post_id")
+print("移除postid：")
+print(dataset)
+print(dataset.column_names)
+print(dataset.num_columns)
+print(dataset.num_rows)
 dataset.push_to_hub('ioclab/animesfw', private=True, max_shard_size="1GB")
 dataset.save_to_disk(odatapath)
 # cache_dir = "/mnt/disks/data/cache/deanimeimg"
