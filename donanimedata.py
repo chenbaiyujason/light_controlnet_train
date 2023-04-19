@@ -78,7 +78,7 @@ builder.download_and_prepare(output_dir=custom_cache_dir)
 
 # # 加载数据集
 # print("正在加载数据集...")
-dataset = builder.as_dataset()
+dataset = builder.as_dataset(split= 'train' )
 dataload = "/mnt/disks/hfcache/"
 cache_dir = "/mnt/disks/cache/animgsfw"
 # dataset = load_dataset(dataload, cache_dir=cache_dir)
