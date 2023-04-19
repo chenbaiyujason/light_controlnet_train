@@ -13,7 +13,7 @@ from datasets import load_dataset_builder
 from pathlib import Path
 import wandb
 # 更改此路径为你希望将数据集下载到的目录
-custom_cache_dir = "/mnt/disks/hfcache"
+custom_cache_dir = "/mnt/disks/hfcache/data2"
 # Path(custom_cache_dir).mkdir(parents=True, exist_ok=True)
 # os.environ["HF_DATASETS_CACHE"] = custom_cache_dir
 import random
