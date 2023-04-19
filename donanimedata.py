@@ -88,7 +88,7 @@ print(dataset.num_columns)
 print(dataset.num_rows)
 odatapath="/mnt/disks/consdata/consanimeimg/"
 dataset = dataset.remove_columns("post_id")
-dataset.push_to_hub('ioclab/animesfw', private=True, max_shard_size="1GB")
+# dataset.push_to_hub('ioclab/animesfw', private=True, max_shard_size="1GB")
 dataset.save_to_disk(odatapath)
 # cache_dir = "/mnt/disks/data/cache/deanimeimg"
 # Path(cache_dir).mkdir(parents=True, exist_ok=True)
@@ -101,7 +101,11 @@ dataset.save_to_disk(odatapath)
 print(dataset.column_names)
 print(dataset.num_columns)
 print(dataset.num_rows)
-# dataset = dataset.map(transforms, batched=True,num_proc=220)
+dataset = dataset.map(transforms, batched=True,num_proc=220)
+odatapath="/mnt/disks/consdata/consanimelightimg/"
+
+dataset.save_to_disk(odatapath)
+
 print(dataset.column_names)
 print(dataset.num_columns)
 print(dataset.num_rows)
