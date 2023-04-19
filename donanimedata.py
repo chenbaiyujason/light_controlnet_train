@@ -17,7 +17,6 @@ custom_cache_dir = "/mnt/disks/hfcache"
 # Path(custom_cache_dir).mkdir(parents=True, exist_ok=True)
 # os.environ["HF_DATASETS_CACHE"] = custom_cache_dir
 
-
 def imgprocess(img):
     # 打开原始图像
     if img.mode != 'RGB':
