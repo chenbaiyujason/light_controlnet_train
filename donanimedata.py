@@ -73,7 +73,7 @@ builder = DanbooruDataset(config_name='0-sfw')
 
 # 下载数据集
 print("正在下载数据集...")
-builder.download_and_prepare(custom_cache_dir)
+builder.download_and_prepare(output_dir=custom_cache_dir)
 
 # 加载数据集
 print("正在加载数据集...")
