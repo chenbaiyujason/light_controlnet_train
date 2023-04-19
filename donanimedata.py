@@ -81,7 +81,9 @@ def transforms(examples):
 # dataset = builder.as_dataset()
 dataload = "/mnt/disks/hfcache/"
 cache_dir = "/mnt/disks/cache/animgsfw"
-dataset = load_dataset(dataload, cache_dir=cache_dir)
+builder = load_dataset_builder(dataload )
+dataset = builder.as_dataset()
+# dataset = load_dataset(dataload, cache_dir=cache_dir)
 # 显示一些数据集信息
 print("数据集信息：")
 print(dataset)
