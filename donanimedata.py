@@ -70,7 +70,7 @@ def transforms(examples):
     examples["conditioning_image"] = [imgprocess(image) for image in examples["image"]]
     return examples
 # 选择子集，将 '0-sfw' 更改为 '1-full' 或 '2-tags' 以下载其他子集
-# builder = DanbooruDataset(config_name='0-sfw')
+builder = DanbooruDataset(config_name='0-sfw')
 
 # # 下载数据集
 # print("正在下载数据集...")
@@ -78,9 +78,9 @@ def transforms(examples):
 
 # # 加载数据集
 # print("正在加载数据集...")
-# dataset = builder.as_dataset(split= 'train' )
-dataset = load_dataset("/mnt/disks/hfcache/downloads/extracted/", cache_dir="/mnt/disks/hfcache/downloads/extracted/")
-
+dataset = builder.as_dataset(split= 'train' )
+# dataset = load_dataset("/mnt/disks/hfcache/downloads/extracted/", cache_dir="/mnt/disks/hfcache/downloads/extracted/")
+#
 dataload = "/mnt/disks/hfcache/"
 cache_dir = "/mnt/disks/cache/animgsfw"
 # dataset = load_dataset(dataload, cache_dir=cache_dir)
