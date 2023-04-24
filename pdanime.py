@@ -55,7 +55,7 @@ def imgprocess(img):
     enhancer = ImageEnhance.Contrast(img)
     img_contrast = enhancer.enhance(1.3)
     img = img_contrast
-    img = img.resize((512, 512), resample=Image.BILINEAR)
+    img = img.resize((768, 768), resample=Image.BILINEAR)
 
     return img
 
@@ -81,7 +81,7 @@ print(dataset.num_rows)
 # datasettest = datasettest.map(transforms, batched=True,num_proc=220)
 # print(datasettest.column_names)
 # dataset = dataset.remove_columns("conditioning_image")
-dataset = dataset.map(transforms,num_proc=180)
+dataset = dataset.map(transforms,num_proc=20)
 print(dataset.column_names)
 print(dataset.num_columns)
 print(dataset.num_rows)
