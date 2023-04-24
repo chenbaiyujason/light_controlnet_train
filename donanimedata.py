@@ -7,9 +7,9 @@ import os
 # import numpy as np
 # import cv2
 import datasets
-# from danbooru2022 import DanbooruDataset
+from danbooru2022 import DanbooruDataset
 # from datasets import load_dataset
-from datasets import load_dataset_builder,load_from_disk
+from datasets import load_dataset_builder,load_from_disk, load_dataset
 # from pathlib import Path
 # import wandb
 # 更改此路径为你希望将数据集下载到的目录
@@ -69,7 +69,7 @@ custom_cache_dir = "/mnt/disks/hfcache/data2"
 # def transforms(examples):
 #     examples["conditioning_image"] = [imgprocess(image) for image in examples["image"]]
 #     return examples
-# # 选择子集，将 '0-sfw' 更改为 '1-full' 或 '2-tags' 以下载其他子集
+# 选择子集，将 '0-sfw' 更改为 '1-full' 或 '2-tags' 以下载其他子集
 # builder = DanbooruDataset(config_name='0-sfw')
 #
 # # # 下载数据集
@@ -79,13 +79,13 @@ custom_cache_dir = "/mnt/disks/hfcache/data2"
 # # # 加载数据集
 # # print("正在加载数据集...")
 # dataset = builder.as_dataset(split= 'train' )
-# # dataset = load_dataset("/mnt/disks/hfcache/downloads/extracted/", cache_dir="/mnt/disks/hfcache/downloads/extracted/")
+# dataset = load_dataset("/mnt/disks/hfcache/downloads/extracted/", cache_dir="/mnt/disks/hfcache/downloads/extracted/")
 
 # dataset=load_from_disk("/mnt/disks/hfcache/downloads/extracted/")
-dataset=load_from_disk("/mnt/disks/hfcache/data2")
+# dataset=load_from_disk("/mnt/disks/hfcache/data2")
 dataload = "/mnt/disks/hfcache/"
 cache_dir = "/mnt/disks/cache/animgsfw"
-# dataset = load_dataset(dataload, cache_dir=cache_dir)
+dataset = load_dataset(dataload, cache_dir=cache_dir)
 # 显示一些数据集信息
 print("数据集信息：")
 print(dataset.column_names)
