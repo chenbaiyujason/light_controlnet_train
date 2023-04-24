@@ -85,6 +85,7 @@ custom_cache_dir = "/mnt/disks/hfcache/data2"
 # dataset=load_from_disk("/mnt/disks/hfcache/data2")
 dataload = "/mnt/disks/hfcache/"
 cache_dir = "/mnt/disks/cache/animgsfw"
+print("开始加载数据集")
 dataset = load_dataset(dataload, cache_dir=cache_dir)
 # 显示一些数据集信息
 print("数据集信息：")
