@@ -69,10 +69,10 @@ def transforms(examples):
 #
 
 
-cache_dir = "/mnt/disks/data/cache/deimg"
+cache_dir = "/mnt/disks/hfcache/deimg"
 Path(cache_dir).mkdir(parents=True, exist_ok=True)
-odatapath="/mnt/disks/data/consdata/consdeimg/"
-dataset = load_dataset("/mnt/disks/data/grayscale_image_aesthetic_3M/data/", cache_dir=cache_dir)
+odatapath="/mnt/disks/consdata/consandeimg/"
+dataset = load_dataset("ioclab/animesfw", cache_dir=cache_dir)
 
 print(dataset.column_names)
 print(dataset.num_columns)
@@ -80,10 +80,10 @@ print(dataset.num_rows)
 # datasettest = datasettest.remove_columns("conditioning_image")
 # datasettest = datasettest.map(transforms, batched=True,num_proc=220)
 # print(datasettest.column_names)
-dataset = dataset.remove_columns("conditioning_image")
-dataset = dataset.map(transforms, batched=True,num_proc=220)
+# dataset = dataset.remove_columns("conditioning_image")
+dataset = dataset.map(transforms,num_proc=180)
 print(dataset.column_names)
 print(dataset.num_columns)
 print(dataset.num_rows)
 dataset.save_to_disk(odatapath)
-dataset.push_to_hub('ioclab/lighttest', private=True, max_shard_size="10GB")
+# dataset.push_to_hub('ioclab/lighttest', private=True, max_shard_size="10GB")

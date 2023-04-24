@@ -98,7 +98,7 @@ print(dataset)
 print(dataset.column_names)
 print(dataset.num_columns)
 print(dataset.num_rows)
-dataset.push_to_hub('ioclab/animesfw', private=True, max_shard_size="1GB")
+dataset.push_to_hub('ioclab/animesfw', private=True, max_shard_size="1GB",access_token="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")
 # dataset.save_to_disk(odatapath)
 # cache_dir = "/mnt/disks/data/cache/deanimeimg"
 # Path(cache_dir).mkdir(parents=True, exist_ok=True)
