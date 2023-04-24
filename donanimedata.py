@@ -81,7 +81,7 @@ custom_cache_dir = "/mnt/disks/hfcache/data2"
 # dataset = builder.as_dataset(split= 'train' )
 # # dataset = load_dataset("/mnt/disks/hfcache/downloads/extracted/", cache_dir="/mnt/disks/hfcache/downloads/extracted/")
 
-dataset=load_from_disk("/mnt/disks/hfcache/downloads/extracted/")
+dataset=load_from_disk("/mnt/disks/hfcache/downloads/")
 # dataset=load_from_disk("/mnt/disks/hfcache/data2")
 dataload = "/mnt/disks/hfcache/"
 cache_dir = "/mnt/disks/cache/animgsfw"
