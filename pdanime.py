@@ -10,7 +10,7 @@ from datasets import load_dataset
 
 from pathlib import Path
 import wandb
-
+import random
 
 def imgprocess(img):
     rand_num = random.uniform(-0.3, 1)
