@@ -3,4 +3,4 @@
 
 自然图片集：grayscale_image_aesthetic_3M
 
-/mnt/disks/data/light_controlnet_train
+/mnt/disks/light_controlnet_train
