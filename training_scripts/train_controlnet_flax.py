@@ -537,10 +537,10 @@ def make_train_dataset(args, tokenizer, batch_size=None):
 
     # Preprocessing the datasets.
     # We need to tokenize inputs and targets.
-    if isinstance(dataset["train"], IterableDataset):
-        column_names = next(iter(dataset["train"])).keys()
+    if isinstance(dataset, IterableDataset):
+        column_names = next(iter(dataset)).keys()
     else:
-        column_names = dataset["train"].column_names
+        column_names = dataset.column_names
 
     # 6. Get the column names for input/target.
     if args.image_column is None:
@@ -625,19 +625,19 @@ def make_train_dataset(args, tokenizer, batch_size=None):
     if jax.process_index() == 0:
         if args.max_train_samples is not None:
             if args.streaming:
-                dataset["train"] = dataset["train"].shuffle(seed=args.seed).take(args.max_train_samples)
+                dataset = dataset.shuffle(seed=args.seed).take(args.max_train_samples)
             else:
-                dataset["train"] = dataset["train"].shuffle(seed=args.seed).select(range(args.max_train_samples))
+                dataset = dataset.shuffle(seed=args.seed).select(range(args.max_train_samples))
         # Set the training transforms
         if args.streaming:
-            train_dataset = dataset["train"].map(
+            train_dataset = dataset.map(
                 preprocess_train,
                 batched=True,
                 batch_size=batch_size,
-                remove_columns=list(dataset["train"].features.keys()),
+                remove_columns=list(dataset.features.keys()),
             )
         else:
-            train_dataset = dataset["train"].with_transform(preprocess_train)
+            train_dataset = dataset.with_transform(preprocess_train)
 
     return train_dataset
 

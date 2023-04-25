@@ -120,5 +120,5 @@ print("处理完成")
 # dataset = dataset.rename_column("my_subset", "train")
 # dataset.save_to_disk(odatapath)
 dataset.save_to_disk(testdatapath)
-#
+print("保存完成")
 # dataset.push_to_hub('ioclab/lighttestout', private=False, max_shard_size="1GB")
