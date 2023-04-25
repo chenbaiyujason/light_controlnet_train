@@ -1,12 +1,12 @@
 export MODEL_DIR="runwayml/stable-diffusion-v1-5"
 export OUTPUT_DIR="/mnt/disks/controlnet_model/control_v1u_sd15_illumination/{timestamp}"
-export DATASET_DIR="/mnt/disks/testdata/400k/"
+export DATASET_DIR="/mnt/disks/consdata/consdeimg/"
 export DISK_DIR="/mnt/disks/cache/trainlight"
 export HUB_MODEL_ID="ioclab/control_v1u_sd15_illumination"
 
 sudo python3 train_controlnet_flax.py \
  --pretrained_model_name_or_path=$MODEL_DIR \
- --controlnet_model_name_or_path="/mnt/disks/controlnet_model/control_v1u_sd15_illumination/20230419_065023/9000"  \
+ --controlnet_model_name_or_path="/mnt/disks/controlnet_model/control_v1u_sd15_illumination/20230418_113648/7000"  \
  --output_dir=$OUTPUT_DIR \
  --train_data_dir=$DATASET_DIR \
  --load_from_disk \
@@ -15,15 +15,15 @@ sudo python3 train_controlnet_flax.py \
  --validation_prompt "a woman sitting at a piano in a dark room with a window behind her and a window behind her, Atey Ghailan, anime art, a painting, neo-romanticism" "a woman with horns and a demon face on her head, with her hands on her face, in front of a demon like background, Ayami Kojima, anime art, a manga drawing, space art" "A girl with her head down, Sailor Moon" "(masterpiece, best quality: 1.4), 1girl,detailed background, white crystal, crysal cluster,long hair,jewelry, earrings, necklace, crown, bride, white hair, halo," "(masterpiece, best quality: 1.4), 1girl,detailed background, white crystal, crysal cluster,long hair,jewelry, earrings, necklace, crown, bride, white hair, halo,"  "(masterpiece, best quality: 1.4), 1girl,detailed background, white crystal, crysal cluster,long hair,jewelry, earrings, necklace, crown, bride, white hair, halo," "(masterpiece, best quality: 1.4), 1girl,detailed background, white crystal, crysal cluster,long hair,jewelry, earrings, necklace, crown, bride, white hair, halo," "(masterpiece, best quality: 1.4), 1girl,detailed background, white crystal, crysal cluster,long hair,jewelry, earrings, necklace, crown, bride, white hair, halo,"  \
  --validation_steps=500 \
  --checkpointing_steps=500 \
- --resolution=768 \
+ --resolution=512 \
  --learning_rate=1e-5 \
  --train_batch_size=2 \
  --gradient_accumulation_steps=25 \
  --revision="non-ema" \
  --mixed_precision="bf16" \
  --from_pt \
- --num_train_epochs=2 \
- --max_train_steps=4000 \
+ --num_train_epochs=3 \
+ --max_train_steps=55000 \
  --report_to="wandb" \
  --dataloader_num_workers=16 \
  --logging_steps=1 \
