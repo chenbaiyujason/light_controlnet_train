@@ -58,7 +58,7 @@ def imgprocess(img):
     img_contrast = enhancer.enhance(1.2 + rand_num * 0.15)
     img = img_contrast
     img = img.resize((768,768), resample=Image.BILINEAR)
-    print(img)
+    print(f"处理图片{img}")
     return img
 
 def transforms(examples):
