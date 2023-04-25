@@ -1,4 +1,5 @@
 import os
+import time
 
 from PIL import Image, ImageFilter
 import matplotlib.pyplot as plt
@@ -58,7 +59,7 @@ def imgprocess(img):
     img_contrast = enhancer.enhance(1.2 + rand_num * 0.15)
     img = img_contrast
     img = img.resize((768,768), resample=Image.BILINEAR)
-    print(f"处理图片{img}")
+    print(f"{time.time()}处理图片{img}")
     return img
 
 def transforms(examples):
@@ -71,12 +72,12 @@ def transforms(examples):
 
 
 
-# cache_dir = "/mnt/disks/hfcache/deimg"
+cache_dir = "/mnt/disks/hfcache/deimg"
 # Path(cache_dir).mkdir(parents=True, exist_ok=True)
 # odatapath="/mnt/disks/consdata/consandeimg/"
-testdatapath="/mnt/disks/testdata/1000/"
-# Path(cache_dir).mkdir(parents=True, exist_ok=True)
-# dataset = load_dataset("ioclab/animesfw", cache_dir=cache_dir,split= 'train')
+testdatapath="/mnt/disks/testdata/400k/"
+Path(testdatapath).mkdir(parents=True, exist_ok=True)
+dataset = load_dataset("ioclab/animesfw", cache_dir=cache_dir,split= 'train')
 # dataset=dataset.train_test_split(test_size=0.001, shuffle=True)["test"]
 
 
@@ -84,17 +85,15 @@ testdatapath="/mnt/disks/testdata/1000/"
 # # num_examples = dataset.num_columns
 # # empty_images.fill(None)
 
-dataset=load_from_disk(testdatapath)
+# dataset=load_from_disk(testdatapath)
 # print(dataset.column_names)
 # print( dataset.num_columns)
 # print(dataset.num_rows)
 # imageblack = Image.new("RGB", (16, 16), color="black")
-dataset=dataset.remove_columns("conditioning_image")
+# dataset=dataset.remove_columns("conditioning_image")
 print(dataset.column_names)
 print(dataset.num_columns)
 print(dataset.num_rows)
-image_array = np.zeros((16,16,3), dtype=np.uint8)
-bytes_array = image_array.tobytes()
 # dataset=dataset.add_column(name="conditioning_image", column=[bytes_array] * dataset.num_rows)
 
 # dataset.save_to_disk(testdatapath)
@@ -113,6 +112,6 @@ print(dataset.num_rows)
 print("处理完成")
 
 # dataset.save_to_disk(odatapath)
-# dataset.save_to_disk(testdatapath)
+dataset.save_to_disk(testdatapath)
 #
-dataset.push_to_hub('ioclab/lighttestout', private=False, max_shard_size="1GB")
+# dataset.push_to_hub('ioclab/lighttestout', private=False, max_shard_size="1GB")
