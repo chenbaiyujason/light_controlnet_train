@@ -81,7 +81,7 @@ dataset = load_dataset("ioclab/animesfw", cache_dir=cache_dir,split="train[:1000
 # num_examples = dataset.num_columns
 # empty_images.fill(None)
 print(dataset.column_names)
-print( dataset['image'].num_columns)
+print( dataset.num_columns)
 print(dataset.num_rows)
 dataset = dataset.add_column('conditioning_image', dataset['image'])
 print(dataset.column_names)
