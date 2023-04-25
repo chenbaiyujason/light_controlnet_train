@@ -6,7 +6,7 @@ from PIL import Image, ImageEnhance, ImageFilter,ImageOps
 import numpy as np
 import cv2
 
-from datasets import load_dataset
+from datasets import load_dataset,load_from_disk
 
 from pathlib import Path
 import wandb
@@ -29,7 +29,7 @@ def imgprocess(img):
     # 使用高斯模糊去除一部分细节
     img = img.filter(ImageFilter.GaussianBlur(radius=5))
     img = img.filter(ImageFilter.BoxBlur(radius=15))
-    img = img.filter(ImageFilter.GaussianBlur(radius=10))
+    img = img.filter(ImageFilter.GaussianBlur(radius=10+rand_num))
 
     # 使用中值滤波器去除更多的细节
     img = img.filter(ImageFilter.MedianFilter(size=3))
@@ -73,7 +73,8 @@ def transforms(examples):
 cache_dir = "/mnt/disks/hfcache/deimg"
 Path(cache_dir).mkdir(parents=True, exist_ok=True)
 odatapath="/mnt/disks/consdata/consandeimg/"
-dataset = load_dataset("ioclab/animesfw", cache_dir=cache_dir)
+dataset = load_dataset("ioclab/animesfw", cache_dir=cache_dir,split="train[:1000]")
+# dataset=load_from_disk("/mnt/disks/hfcache/deimg")
 
 print(dataset.column_names)
 print(dataset.num_columns)
@@ -82,9 +83,9 @@ print(dataset.num_rows)
 # datasettest = datasettest.map(transforms, batched=True,num_proc=220)
 # print(datasettest.column_names)
 # dataset = dataset.remove_columns("conditioning_image")
-dataset = dataset.map(transforms,batched=True,num_proc=120)
+# dataset = dataset.map(transforms,batched=True)
 print(dataset.column_names)
 print(dataset.num_columns)
 print(dataset.num_rows)
-dataset.save_to_disk(odatapath)
+# dataset.save_to_disk(odatapath)
 # dataset.push_to_hub('ioclab/lighttest', private=True, max_shard_size="10GB")
