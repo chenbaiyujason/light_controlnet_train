@@ -78,7 +78,7 @@ testdatapath="/mnt/disks/testdata/1000/"
 Path(cache_dir).mkdir(parents=True, exist_ok=True)
 dataset = load_dataset("ioclab/animesfw", cache_dir=cache_dir,split="train[:1000]")
 
-more_text = dataset["tags"]
+more_text = dataset["image"]
 
 # dataset=load_from_disk("/mnt/disks/hfcache/deimg")
 # num_examples = dataset.num_columns
@@ -86,7 +86,7 @@ more_text = dataset["tags"]
 print(dataset.column_names)
 print( dataset.num_columns)
 print(dataset.num_rows)
-dataset.add_column(name="conditioning_image", column=more_text)
+dataset=dataset.add_column(name="conditioning_image", column=more_text)
 print(dataset.column_names)
 print(dataset.num_columns)
 print(dataset.num_rows)
