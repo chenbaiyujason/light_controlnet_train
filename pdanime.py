@@ -73,9 +73,12 @@ def transforms(examples):
 cache_dir = "/mnt/disks/hfcache/deimg"
 Path(cache_dir).mkdir(parents=True, exist_ok=True)
 odatapath="/mnt/disks/consdata/consandeimg/"
+testdatapath="/mnt/disks/testdata/1000/"
+Path(cache_dir).mkdir(parents=True, exist_ok=True)
+
 dataset = load_dataset("ioclab/animesfw", cache_dir=cache_dir,split="train[:1000]")
 # dataset=load_from_disk("/mnt/disks/hfcache/deimg")
-
+dataset.save_to_disk("/mnt/disks/consdata/consandeimg/")
 print(dataset.column_names)
 print(dataset.num_columns)
 print(dataset.num_rows)
