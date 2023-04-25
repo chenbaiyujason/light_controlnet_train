@@ -66,6 +66,7 @@ def imgprocess(img):
     progress = inti / 400000
 
     pbar.update(1 / progress / 100)
+    pbar.set_description(f"处理数量: n={inti}")
     return img
 
 def transforms(examples):
