@@ -77,7 +77,7 @@ odatapath="/mnt/disks/consdata/consandeimg/"
 testdatapath="/mnt/disks/testdata/1000/"
 Path(cache_dir).mkdir(parents=True, exist_ok=True)
 dataset = load_dataset("ioclab/animesfw", cache_dir=cache_dir,split= 'train')
-dataset=dataset[:100]
+dataset=dataset.train_test_split(test_size=0.001, shuffle=True)["test"]
 # dataset=load_from_disk("/mnt/disks/hfcache/deimg")
 # # num_examples = dataset.num_columns
 # # empty_images.fill(None)
@@ -91,6 +91,7 @@ print(dataset.num_rows)
 # dataset.save_to_disk(testdatapath)
 dataset.set_transform(transforms)
 print("处理完成")
+dataset.reset_format()
 # # datasettest = datasettest.remove_columns("conditioning_image")
 # # datasettest = datasettest.map(transforms, batched=True,num_proc=220)
 # # print(datasettest.column_names)
