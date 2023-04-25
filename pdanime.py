@@ -77,6 +77,7 @@ odatapath="/mnt/disks/consdata/consandeimg/"
 testdatapath="/mnt/disks/testdata/1000/"
 Path(cache_dir).mkdir(parents=True, exist_ok=True)
 dataset = load_dataset("ioclab/animesfw", cache_dir=cache_dir,split= 'train')
+dataset=dataset[:100]
 # dataset=load_from_disk("/mnt/disks/hfcache/deimg")
 # # num_examples = dataset.num_columns
 # # empty_images.fill(None)
@@ -98,7 +99,9 @@ print("处理完成")
 print(dataset.column_names)
 print(dataset.num_columns)
 print(dataset.num_rows)
-dataset.save_to_disk(odatapath)
-# dataset=load_from_disk(testdatapath)
+# dataset.save_to_disk(odatapath)
+dataset.save_to_disk(testdatapath)
+
+dataset=load_from_disk(testdatapath)
 #
-# dataset.push_to_hub('ioclab/lighttestout', private=False, max_shard_size="1GB")
+dataset.push_to_hub('ioclab/lighttestout', private=False, max_shard_size="1GB")
