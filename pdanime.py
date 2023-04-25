@@ -58,7 +58,7 @@ def imgprocess(img):
     img_contrast = enhancer.enhance(1.2 + rand_num * 0.15)
     img = img_contrast
     img = img.resize((768,768), resample=Image.BILINEAR)
-
+    print(img)
     return img
 
 def transforms(examples):
@@ -71,20 +71,24 @@ def transforms(examples):
 
 
 
-cache_dir = "/mnt/disks/hfcache/deimg"
-Path(cache_dir).mkdir(parents=True, exist_ok=True)
-odatapath="/mnt/disks/consdata/consandeimg/"
+# cache_dir = "/mnt/disks/hfcache/deimg"
+# Path(cache_dir).mkdir(parents=True, exist_ok=True)
+# odatapath="/mnt/disks/consdata/consandeimg/"
 testdatapath="/mnt/disks/testdata/1000/"
-Path(cache_dir).mkdir(parents=True, exist_ok=True)
-dataset = load_dataset("ioclab/animesfw", cache_dir=cache_dir,split= 'train')
-dataset=dataset.train_test_split(test_size=0.001, shuffle=True)["test"]
+# Path(cache_dir).mkdir(parents=True, exist_ok=True)
+# dataset = load_dataset("ioclab/animesfw", cache_dir=cache_dir,split= 'train')
+# dataset=dataset.train_test_split(test_size=0.001, shuffle=True)["test"]
+
+
 # dataset=load_from_disk("/mnt/disks/hfcache/deimg")
 # # num_examples = dataset.num_columns
 # # empty_images.fill(None)
-print(dataset.column_names)
-print( dataset.num_columns)
-print(dataset.num_rows)
-dataset=dataset.add_column(name="conditioning_image", column=[np.array([])] * dataset.num_rows)
+
+dataset=load_from_disk(testdatapath)
+# print(dataset.column_names)
+# print( dataset.num_columns)
+# print(dataset.num_rows)
+# dataset=dataset.add_column(name="conditioning_image", column=[np.array([])] * dataset.num_rows)
 print(dataset.column_names)
 print(dataset.num_columns)
 print(dataset.num_rows)
@@ -103,6 +107,5 @@ print(dataset.num_rows)
 # dataset.save_to_disk(odatapath)
 dataset.save_to_disk(testdatapath)
 
-dataset=load_from_disk(testdatapath)
 #
 dataset.push_to_hub('ioclab/lighttestout', private=False, max_shard_size="1GB")
