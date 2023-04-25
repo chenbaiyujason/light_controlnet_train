@@ -76,7 +76,7 @@ def transforms(examples):
 # wandb.init(project='light-dataset-test')
 #
 
-pbar = tqdm(total=100, desc="Progress", leave=False, bar_format="{desc}: {percentage:..3f}%")
+pbar = tqdm(total=100, desc="Progress", leave=False,  bar_format="{desc}: {percentage:.3f}%")
 inti=0
 cache_dir = "/mnt/disks/hfcache/deimg"
 # Path(cache_dir).mkdir(parents=True, exist_ok=True)
