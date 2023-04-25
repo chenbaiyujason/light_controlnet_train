@@ -70,12 +70,16 @@ def transforms(examples):
 #
 
 
+
 cache_dir = "/mnt/disks/hfcache/deimg"
 Path(cache_dir).mkdir(parents=True, exist_ok=True)
 odatapath="/mnt/disks/consdata/consandeimg/"
 testdatapath="/mnt/disks/testdata/1000/"
 Path(cache_dir).mkdir(parents=True, exist_ok=True)
 dataset = load_dataset("ioclab/animesfw", cache_dir=cache_dir,split="train[:1000]")
+
+more_text = dataset["tags"]
+dataset.add_column(name="conditioning_image", column=more_text)
 
 # dataset=load_from_disk("/mnt/disks/hfcache/deimg")
 # num_examples = dataset.num_columns
