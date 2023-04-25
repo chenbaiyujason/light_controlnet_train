@@ -79,11 +79,12 @@ dataset = load_dataset("ioclab/animesfw", cache_dir=cache_dir,split="train[:1000
 # dataset=load_from_disk("/mnt/disks/hfcache/deimg")
 
 dataset.add_column("conditioning_image", DataDict({"filepath": [], "image": []}))
-dataset.set_transform(transforms)
 print(dataset.column_names)
 print(dataset.num_columns)
 print(dataset.num_rows)
 dataset.save_to_disk(testdatapath)
+dataset.set_transform(transforms)
+
 
 # datasettest = datasettest.remove_columns("conditioning_image")
 # datasettest = datasettest.map(transforms, batched=True,num_proc=220)
