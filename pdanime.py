@@ -79,10 +79,11 @@ dataset = load_dataset("ioclab/animesfw", cache_dir=cache_dir,split="train[:1000
 
 # dataset=load_from_disk("/mnt/disks/hfcache/deimg")
 # num_examples = dataset.num_columns
-empty_images = np.zeros(dataset.num_columns)
 # empty_images.fill(None)
-
-dataset = dataset.add_column('conditioning_image', empty_images)
+print(dataset.column_names)
+print( dataset['image'].num_columns)
+print(dataset.num_rows)
+dataset = dataset.add_column('conditioning_image', dataset['image'])
 print(dataset.column_names)
 print(dataset.num_columns)
 print(dataset.num_rows)
