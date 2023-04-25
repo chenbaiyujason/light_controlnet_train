@@ -17,7 +17,7 @@ sudo python3 train_controlnet_flax.py \
  --checkpointing_steps=500 \
  --resolution=768 \
  --learning_rate=1e-5 \
- --train_batch_size=2 \
+ --train_batch_size=1 \
  --gradient_accumulation_steps=25 \
  --revision="non-ema" \
  --mixed_precision="bf16" \
