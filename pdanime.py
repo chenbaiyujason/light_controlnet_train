@@ -100,5 +100,6 @@ print(dataset.column_names)
 print(dataset.num_columns)
 print(dataset.num_rows)
 # dataset.save_to_disk(odatapath)
-dataset.rename_dataset('light1000')
+dataset=load_from_disk(testdatapath)
+
 dataset.push_to_hub('ioclab/lighttestout', private=False, max_shard_size="1GB")
