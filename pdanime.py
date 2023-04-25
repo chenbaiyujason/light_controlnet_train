@@ -12,7 +12,7 @@ from datasets import load_dataset,load_from_disk
 from pathlib import Path
 import wandb
 import random
-
+from tqdm import tqdm
 def imgprocess(img):
     rand_num = random.uniform(-0.3, 1)
     rand_num = round(rand_num, 2)
@@ -60,6 +60,12 @@ def imgprocess(img):
     img = img_contrast
     img = img.resize((768,768), resample=Image.BILINEAR)
     # print(f"{time.time()}处理图片{img}")
+    global inti
+    global pbar
+    inti +=1
+    progress = inti / 400000
+
+    pbar.update(1 / progress / 100)
     return img
 
 def transforms(examples):
@@ -70,8 +76,8 @@ def transforms(examples):
 # wandb.init(project='light-dataset-test')
 #
 
-
-
+pbar = tqdm(total=100, desc="Progress", leave=False, bar_format="{desc}: {percentage:..3f}%")
+inti=0
 cache_dir = "/mnt/disks/hfcache/deimg"
 # Path(cache_dir).mkdir(parents=True, exist_ok=True)
 # odatapath="/mnt/disks/consdata/consandeimg/"
