@@ -106,7 +106,7 @@ print(dataset.column_names)
 print(dataset.num_columns)
 print(dataset.num_rows)
 # dataset.save_to_disk(odatapath)
-dataset.save_to_disk(testdatapath)
+# dataset.save_to_disk(testdatapath)
 
 #
 dataset.push_to_hub('ioclab/lighttestout', private=False, max_shard_size="1GB")
