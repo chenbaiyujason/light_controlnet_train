@@ -77,7 +77,7 @@ cache_dir = "/mnt/disks/hfcache/deimg"
 # odatapath="/mnt/disks/consdata/consandeimg/"
 testdatapath="/mnt/disks/testdata/400k/"
 Path(testdatapath).mkdir(parents=True, exist_ok=True)
-dataset = load_dataset("ioclab/animesfw", cache_dir=cache_dir,split= 'train')
+dataset = load_dataset("ioclab/animesfw", cache_dir=cache_dir,split= 'train[:400000]')
 # dataset=dataset.train_test_split(test_size=0.001, shuffle=True)["test"]
 
 
@@ -110,7 +110,7 @@ print(dataset.column_names)
 print(dataset.num_columns)
 print(dataset.num_rows)
 print("处理完成")
-
+# dataset = dataset.rename_column("my_subset", "train")
 # dataset.save_to_disk(odatapath)
 dataset.save_to_disk(testdatapath)
 #
