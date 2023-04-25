@@ -2,7 +2,7 @@ import os
 
 from PIL import Image, ImageFilter
 import matplotlib.pyplot as plt
-from PIL import Image, ImageEnhance, ImageFilter,ImageOps
+from PIL import Image, ImageEnhance, ImageFilter,ImageOps,DataDict
 import numpy as np
 import cv2
 
@@ -75,9 +75,10 @@ Path(cache_dir).mkdir(parents=True, exist_ok=True)
 odatapath="/mnt/disks/consdata/consandeimg/"
 testdatapath="/mnt/disks/testdata/1000/"
 Path(cache_dir).mkdir(parents=True, exist_ok=True)
-
 dataset = load_dataset("ioclab/animesfw", cache_dir=cache_dir,split="train[:1000]")
 # dataset=load_from_disk("/mnt/disks/hfcache/deimg")
+
+dataset.add_column("conditioning_image", DataDict({"filepath": [], "image": []}))
 dataset.set_transform(transforms)
 print(dataset.column_names)
 print(dataset.num_columns)
