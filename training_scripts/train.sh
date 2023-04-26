@@ -6,7 +6,7 @@ export HUB_MODEL_ID="ioclab/control_v1u_sd15_illumination"
 
 sudo python3 train_controlnet_flax.py \
  --pretrained_model_name_or_path=$MODEL_DIR \
- --controlnet_model_name_or_path="/mnt/disks/controlnet_model/control_v1u_sd15_illumination/20230419_065023/9000"  \
+ --controlnet_model_name_or_path="/mnt/disks/controlnet_model/control_v1u_sd15_illumination/20230425_093440/3500"  \
  --output_dir=$OUTPUT_DIR \
  --train_data_dir=$DATASET_DIR \
  --load_from_disk \
@@ -28,5 +28,4 @@ sudo python3 train_controlnet_flax.py \
  --dataloader_num_workers=16 \
  --logging_steps=1 \
  --push_to_hub \
- --hub_model_id=$HUB_MODEL_ID \
  --tracker_project_name="light-controlnet"
