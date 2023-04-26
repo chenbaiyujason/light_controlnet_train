@@ -82,9 +82,9 @@ inti=0
 cache_dir = "/mnt/disks/hfcache/deimg"
 # Path(cache_dir).mkdir(parents=True, exist_ok=True)
 # odatapath="/mnt/disks/consdata/consandeimg/"
-testdatapath="/mnt/disks/testdata/400k/"
+testdatapath="/mnt/disks/testdata/600k/"
 Path(testdatapath).mkdir(parents=True, exist_ok=True)
-dataset = load_dataset("ioclab/animesfw", cache_dir=cache_dir,split= 'train[:400000]')
+dataset = load_dataset("ioclab/animesfw", cache_dir=cache_dir,split= 'train[400000:600000]')
 # dataset=dataset.train_test_split(test_size=0.001, shuffle=True)["test"]
 
 
