@@ -1,6 +1,6 @@
 export MODEL_DIR="runwayml/stable-diffusion-v1-5"
 export OUTPUT_DIR="/mnt/disks/controlnet_model/control_v1u_sd15_illumination/{timestamp}"
-export DATASET_DIR="/mnt/disks/testdata/400k/"
+export DATASET_DIR="/mnt/disks/testdata/600k/"
 export DISK_DIR="/mnt/disks/cache/trainlight"
 export HUB_MODEL_ID="ioclab/control_v1u_sd15_illumination"
 
