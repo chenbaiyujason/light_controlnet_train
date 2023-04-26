@@ -27,5 +27,4 @@ sudo python3 train_controlnet_flax.py \
  --report_to="wandb" \
  --dataloader_num_workers=16 \
  --logging_steps=1 \
- --push_to_hub \
  --tracker_project_name="light-controlnet"
