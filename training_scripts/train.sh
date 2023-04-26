@@ -22,7 +22,7 @@ sudo python3 train_controlnet_flax.py \
  --revision="non-ema" \
  --mixed_precision="bf16" \
  --from_pt \
- --num_train_epochs=2 \
+ --num_train_epochs=1 \
  --max_train_steps=4000 \
  --report_to="wandb" \
  --dataloader_num_workers=16 \
