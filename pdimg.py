@@ -6,7 +6,7 @@ from PIL import Image, ImageEnhance, ImageFilter,ImageOps
 import numpy as np
 import cv2
 
-from datasets import load_dataset
+from datasets import load_dataset,load_from_disk
 
 from pathlib import Path
 import wandb
@@ -141,7 +141,8 @@ def ntransforms(examples):
 cache_dir = "/mnt/disks/consdata/consdeimg"
 Path(cache_dir).mkdir(parents=True, exist_ok=True)
 odatapath="/mnt/disks/consdata/consdeimgpow/"
-dataset = load_dataset("./mnt/disks/consdata/consdeimg", cache_dir=cache_dir)
+# dataset = load_dataset("/mnt/disks/consdata/consdeimg", cache_dir=cache_dir)
+dataset=load_from_disk("/mnt/disks/consdata/consdeimg")
 
 print(dataset.column_names)
 print(dataset.num_columns)

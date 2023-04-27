@@ -92,7 +92,6 @@ dataset = load_dataset("ioclab/animesfw", cache_dir=cache_dir,split= 'train[1000
 # # num_examples = dataset.num_columns
 # # empty_images.fill(None)
 
-# dataset=load_from_disk(testdatapath)
 # print(dataset.column_names)
 # print( dataset.num_columns)
 # print(dataset.num_rows)
