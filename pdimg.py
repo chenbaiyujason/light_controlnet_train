@@ -72,7 +72,6 @@ def imgprocess(img):
 def oimgprocess(image):
     rand_num = random.uniform(0.1, 0.3)
     rand_num = round(rand_num, 2)
-    print(rand_num)
 
 
     if image.mode != 'RGB':
@@ -150,12 +149,17 @@ print(dataset.num_rows)
 # datasettest = datasettest.remove_columns("conditioning_image")
 # datasettest = datasettest.map(transforms, batched=True,num_proc=220)
 # print(datasettest.column_names)
+print("开始处理原图")
 dataset = dataset.remove_columns("conditioning_image")
 dataset = dataset.map(ntransforms, batched=True,num_proc=140)
 dataset = dataset.remove_columns("image")
+print("开始处理目标图")
 dataset = dataset.map(transforms, batched=True,num_proc=140)
+print("处理完成，开始保存")
 print(dataset.column_names)
 print(dataset.num_columns)
 print(dataset.num_rows)
 dataset.save_to_disk(odatapath)
+print("保存完成")
 dataset.push_to_hub('ioclab/lighdatapow', private=False, max_shard_size="1GB")
+print("上传完成")
