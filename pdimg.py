@@ -59,13 +59,7 @@ def imgprocess(img):
     img = img_contrast
     img = img.resize((768,768), resample=Image.BILINEAR)
     # print(f"{time.time()}处理图片{img}")
-    global inti
-    global pbar
-    inti +=1
-    progress = inti / 400000
 
-    pbar.update(1 / progress / 100)
-    pbar.set_description(f"处理数量: n={inti}")
     return img
 
 
