@@ -134,8 +134,8 @@ def ntransforms(examples):
 cache_dir = "/mnt/disks/consdata/consdeimg"
 Path(cache_dir).mkdir(parents=True, exist_ok=True)
 odatapath="/mnt/disks/consdata/consdeimgpow/"
-# dataset = load_dataset("/mnt/disks/consdata/consdeimg", cache_dir=cache_dir)
-dataset=load_from_disk("/mnt/disks/consdata/consdeimg")
+dataset = load_dataset("ioclab/grayscale_image_aesthetic_3M", cache_dir=cache_dir)
+# dataset=load_from_disk("/mnt/disks/consdata/consdeimg")
 
 print(dataset.column_names)
 print(dataset.num_columns)
@@ -153,7 +153,7 @@ print("处理完成，开始保存")
 print(dataset.column_names)
 print(dataset.num_columns)
 print(dataset.num_rows)
+dataset.push_to_hub('ioclab/lighdatapow', private=False, max_shard_size="1GB")
 dataset.save_to_disk(odatapath)
 print("保存完成")
-dataset.push_to_hub('ioclab/lighdatapow', private=False, max_shard_size="1GB")
 print("上传完成")
