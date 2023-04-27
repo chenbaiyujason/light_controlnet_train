@@ -141,7 +141,7 @@ def ntransforms(examples):
 cache_dir = "./mnt/disks/consdata/consdeimg"
 Path(cache_dir).mkdir(parents=True, exist_ok=True)
 odatapath="/mnt/disks/consdata/consdeimgpow/"
-dataset = load_dataset("/mnt/disks/consdata/consdeimg", cache_dir=cache_dir)
+dataset = load_dataset("./mnt/disks/consdata/consdeimg", cache_dir=cache_dir)
 
 print(dataset.column_names)
 print(dataset.num_columns)
