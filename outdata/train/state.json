@@ -1,0 +1,25 @@
+{
+  "_data_files": [
+    {
+      "filename": "data-00000-of-00005.arrow"
+    },
+    {
+      "filename": "data-00001-of-00005.arrow"
+    },
+    {
+      "filename": "data-00002-of-00005.arrow"
+    },
+    {
+      "filename": "data-00003-of-00005.arrow"
+    },
+    {
+      "filename": "data-00004-of-00005.arrow"
+    }
+  ],
+  "_fingerprint": "60a4e5a310a2dc59",
+  "_format_columns": null,
+  "_format_kwargs": {},
+  "_format_type": null,
+  "_output_all_columns": false,
+  "_split": "train"
+}

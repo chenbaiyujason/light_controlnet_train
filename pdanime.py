@@ -70,7 +70,7 @@ def imgprocess(img):
     return img
 
 def transforms(examples):
-    examples["conditioning_image"] = [imgprocess(image) for image in examples["image"]]
+    examples["conditioning_image"] = [imgprocess(image) for image in examples["conditioning_image"]]
     return examples
 
 

@@ -1,0 +1,56 @@
+{
+  "citation": "",
+  "dataset_size": 2151445828,
+  "description": "",
+  "download_checksums": {
+    "https://huggingface.co/datasets/ioclab/grayscale_image_aesthetic_10k/resolve/d8af3f02d6859ed46f5393f7729e22f4101beede/data/train-00000-of-00005-4fbe2887aad6f393.parquet": {
+      "num_bytes": 426938437,
+      "checksum": null
+    },
+    "https://huggingface.co/datasets/ioclab/grayscale_image_aesthetic_10k/resolve/d8af3f02d6859ed46f5393f7729e22f4101beede/data/train-00001-of-00005-bb352e6b6d2f8774.parquet": {
+      "num_bytes": 430303471,
+      "checksum": null
+    },
+    "https://huggingface.co/datasets/ioclab/grayscale_image_aesthetic_10k/resolve/d8af3f02d6859ed46f5393f7729e22f4101beede/data/train-00002-of-00005-7ae969c8325caaca.parquet": {
+      "num_bytes": 429994400,
+      "checksum": null
+    },
+    "https://huggingface.co/datasets/ioclab/grayscale_image_aesthetic_10k/resolve/d8af3f02d6859ed46f5393f7729e22f4101beede/data/train-00003-of-00005-4c3a773afc4d6d31.parquet": {
+      "num_bytes": 427851778,
+      "checksum": null
+    },
+    "https://huggingface.co/datasets/ioclab/grayscale_image_aesthetic_10k/resolve/d8af3f02d6859ed46f5393f7729e22f4101beede/data/train-00004-of-00005-894a4682261eb0f2.parquet": {
+      "num_bytes": 435286822,
+      "checksum": null
+    }
+  },
+  "download_size": 2150374908,
+  "features": {
+    "image": {
+      "_type": "Image"
+    },
+    "caption": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "conditioning_image": {
+      "_type": "Image"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 4301820736,
+  "splits": {
+    "train": {
+      "name": "train",
+      "num_bytes": 2151445828,
+      "num_examples": 10000,
+      "shard_lengths": [
+        4000,
+        4000,
+        2000
+      ],
+      "dataset_name": "parquet"
+    }
+  }
+}
